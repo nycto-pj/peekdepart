@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PEEK depart</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #1C1C1E;
+      color: #F5F5F5;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+    }
+    a { color: #378ADD; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      text-align: center;
+      padding: 64px 24px 48px;
+      border-bottom: 1px solid #3A3A3C;
+    }
+    .app-icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 27px;
+      margin-bottom: 24px;
+    }
+    .app-name {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+    .app-name span {
+      font-weight: 300;
+      color: #6E6E73;
+    }
+    .tagline {
+      margin-top: 12px;
+      font-size: 18px;
+      color: #6E6E73;
+    }
+    .badge {
+      display: inline-block;
+      margin-top: 32px;
+    }
+    .badge img { height: 48px; }
+
+    .section {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      border-bottom: 1px solid #3A3A3C;
+    }
+    .section:last-child { border-bottom: none; }
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: #F5F5F5;
+    }
+    .features {
+      display: grid;
+      gap: 20px;
+    }
+    .feature {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .feature-icon {
+      font-size: 28px;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .feature-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #F5F5F5;
+    }
+    .feature-desc {
+      font-size: 15px;
+      color: #6E6E73;
+    }
+    .steps {
+      list-style: none;
+      counter-reset: step;
+      display: grid;
+      gap: 16px;
+    }
+    .steps li {
+      counter-increment: step;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .steps li::before {
+      content: counter(step);
+      background: #378ADD;
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .steps li span { padding-top: 4px; color: #6E6E73; font-size: 15px; }
+    .steps li strong { color: #F5F5F5; }
+    .note {
+      background: #2C2C2E;
+      border-left: 3px solid #378ADD;
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
+      color: #6E6E73;
+    }
+    .note p { margin-bottom: 6px; }
+    .note p:last-child { margin-bottom: 0; }
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 14px;
+      color: #6E6E73;
+    }
+    footer a { color: #6E6E73; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="app-name">PEEK <span>depart</span></div>
+  <p class="tagline">バス停に近づくだけで、ロック画面に次の発車時刻を表示</p>
+  <a class="badge" href="#">
+    <!-- App Store バッジ（公開後にリンクを差し替え） -->
+    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+  </a>
+</header>
+
+<div class="section">
+  <h2>主な機能</h2>
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon">📍</div>
+      <div>
+        <div class="feature-title">近づいたら自動表示</div>
+        <div class="feature-desc">iOSのジオフェンス機能を活用。設定した距離内にバス停が入ると、ロック画面ウィジェットが自動で更新されます。</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🚌</div>
+      <div>
+        <div class="feature-title">行き先フィルター</div>
+        <div class="feature-desc">登録時に乗りたい方向だけを選択。不要な方面の便は表示しません。</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🔒</div>
+      <div>
+        <div class="feature-title">ロック画面ウィジェット</div>
+        <div class="feature-desc">画面を開かずに次の3便を確認。バスを逃さない。</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🌏</div>
+      <div>
+        <div class="feature-title">6言語対応</div>
+        <div class="feature-desc">日本語・英語・韓国語・中国語・ドイツ語・フランス語に対応。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>使い方</h2>
+  <ol class="steps">
+    <li><span><strong>＋ボタン</strong>から近くのバス停を追加</span></li>
+    <li><span>乗りたい<strong>行き先を選択</strong>して登録</span></li>
+    <li><span>ロック画面に<strong>ウィジェットを追加</strong>（設定 → ロック画面）</span></li>
+    <li><span>あとは<strong>バス停に近づくだけ</strong></span></li>
+  </ol>
+</div>
+
+<div class="section">
+  <h2>注意事項</h2>
+  <div class="note">
+    <p>・位置情報の「常に許可」が必要です</p>
+    <p>・Transitland のオープンデータを使用しています。一部地域では時刻表データが不完全な場合があります</p>
+    <p>・電車・地下鉄には現在対応していません（今後対応予定）</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>サポート・お問い合わせ</h2>
+  <p style="color:#6E6E73; font-size:15px;">
+    ご意見・不具合のご報告は
+    <a href="https://github.com/nycto-pj/peekdepart/issues">GitHub Issues</a>
+    からお寄せください。
+  </p>
+</div>
+
+<footer>
+  <p><a href="privacy.html">プライバシーポリシー</a></p>
+  <p style="margin-top:8px;">© 2026 nycto-pj</p>
+</footer>
+
+</body>
+</html>
