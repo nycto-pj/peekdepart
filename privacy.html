@@ -5,120 +5,281 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>プライバシーポリシー - PEEK depart</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:       #0A0A0B;
+      --surface:  #141416;
+      --card:     #1C1C1E;
+      --border:   #2C2C2E;
+      --primary:  #F5F5F5;
+      --secondary:#8E8E93;
+      --accent:   #378ADD;
+      --accent2:  #5AA3E8;
+    }
+
     body {
-      background: #1C1C1E;
-      color: #F5F5F5;
+      background: var(--bg);
+      color: var(--primary);
       font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
       line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
-    a { color: #378ADD; }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent2); }
+
+    /* ── Header ── */
     header {
+      position: relative;
       text-align: center;
-      padding: 48px 24px 32px;
-      border-bottom: 1px solid #3A3A3C;
+      padding: 56px 24px 40px;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
     }
-    .app-name { font-size: 24px; font-weight: 900; }
-    .app-name span { font-weight: 300; color: #6E6E73; }
-    header h1 { font-size: 16px; font-weight: 400; color: #6E6E73; margin-top: 8px; }
-    .content {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 48px 24px;
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(55,138,221,0.08) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .lang-section { margin-bottom: 64px; }
-    .lang-label {
-      display: inline-block;
-      background: #378ADD;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 2px 10px;
-      border-radius: 4px;
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--secondary);
       margin-bottom: 24px;
+      transition: color .2s;
     }
-    h2 {
-      font-size: 18px;
+    .back-link:hover { color: var(--primary); }
+    .back-link svg {
+      width: 14px; height: 14px;
+      stroke: currentColor; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .app-name { font-size: 22px; font-weight: 900; letter-spacing: -0.5px; }
+    .app-name span { font-weight: 300; color: var(--secondary); }
+    .page-title {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--secondary);
+      margin-top: 8px;
+    }
+
+    /* ── Content ── */
+    .content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    /* ── Lang tab ── */
+    .lang-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0;
+    }
+    .lang-tab {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--secondary);
+      padding: 8px 16px 10px;
+      border-bottom: 2px solid transparent;
+      cursor: default;
+    }
+    .lang-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── Lang section ── */
+    .lang-section {
+      margin-bottom: 72px;
+    }
+    .lang-section:last-child { margin-bottom: 0; }
+    .lang-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(55,138,221,0.12);
+      color: var(--accent);
+      font-size: 11px;
       font-weight: 700;
-      margin: 28px 0 10px;
-      color: #F5F5F5;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
     }
-    p, li { font-size: 15px; color: #6E6E73; }
-    ul { padding-left: 20px; margin-top: 8px; }
-    li { margin-bottom: 4px; }
     .updated {
       font-size: 13px;
-      color: #6E6E73;
-      margin-bottom: 32px;
+      color: var(--secondary);
+      margin-bottom: 36px;
     }
-    footer {
-      text-align: center;
-      padding: 32px 24px;
-      border-top: 1px solid #3A3A3C;
+
+    /* ── Article ── */
+    .article-block {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+    .article-item {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .article-item:last-child { border-bottom: none; }
+    .article-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-size: 14px;
-      color: #6E6E73;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
     }
+    .article-title svg {
+      width: 16px; height: 16px;
+      stroke: var(--accent); fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .article-body {
+      font-size: 14px;
+      color: var(--secondary);
+      line-height: 1.7;
+      padding-left: 26px;
+    }
+    .article-body a { color: var(--accent); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 28px 24px;
+      font-size: 13px;
+      color: var(--secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    footer a { color: var(--secondary); }
+    footer a:hover { color: var(--primary); }
+    .footer-logo { font-size: 15px; font-weight: 900; letter-spacing: -0.5px; color: var(--primary); }
+    .footer-logo span { font-weight: 300; color: var(--secondary); }
   </style>
 </head>
 <body>
 
 <header>
+  <a class="back-link" href="index.html">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    PEEK depart
+  </a>
   <div class="app-name">PEEK <span>depart</span></div>
-  <h1>プライバシーポリシー / Privacy Policy</h1>
+  <div class="page-title">プライバシーポリシー / Privacy Policy</div>
 </header>
 
 <div class="content">
 
   <!-- 日本語 -->
   <div class="lang-section">
-    <div class="lang-label">日本語</div>
+    <div class="lang-badge">日本語</div>
     <p class="updated">最終更新日：2026年3月28日</p>
 
-    <h2>収集する情報</h2>
-
-    <h2>位置情報</h2>
-    <p>本アプリは、登録したバス停への接近を検知するために位置情報（GPS）を使用します。位置情報はお使いのデバイス上でのみ処理され、外部サーバーに送信・保存されることはありません。</p>
-
-    <h2>個人情報</h2>
-    <p>本アプリは、氏名・メールアドレス・連絡先などの個人情報を一切収集しません。</p>
-
-    <h2>第三者サービス</h2>
-    <p>本アプリは発車時刻データの取得に <a href="https://www.transit.land">Transitland</a>（transitland.org）のAPIを使用しています。APIリクエスト時には停留所IDおよび日時情報が送信されます。</p>
-
-    <h2>データの保存</h2>
-    <p>アプリの設定・登録停留所・発車時刻キャッシュはすべてお使いのデバイス内にのみ保存されます。クラウドへの同期や外部への送信は行いません。</p>
-
-    <h2>お問い合わせ</h2>
-    <p>プライバシーに関するご質問は <a href="https://github.com/nycto-pj/peekdepart/issues">GitHub Issues</a> までお問い合わせください。</p>
+    <div class="article-block">
+      <div class="article-item">
+        <div class="article-title">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          位置情報
+        </div>
+        <p class="article-body">本アプリは、登録したバス停への接近を検知するために位置情報（GPS）を使用します。位置情報はお使いのデバイス上でのみ処理され、外部サーバーに送信・保存されることはありません。</p>
+      </div>
+      <div class="article-item">
+        <div class="article-title">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          個人情報
+        </div>
+        <p class="article-body">本アプリは、氏名・メールアドレス・連絡先などの個人情報を一切収集しません。</p>
+      </div>
+      <div class="article-item">
+        <div class="article-title">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/></svg>
+          第三者サービス
+        </div>
+        <p class="article-body">本アプリは発車時刻データの取得に <a href="https://www.transit.land" target="_blank" rel="noopener">Transitland</a> のAPIを使用しています。APIリクエスト時には停留所IDおよび日時情報が送信されます。</p>
+      </div>
+      <div class="article-item">
+        <div class="article-title">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+          データの保存
+        </div>
+        <p class="article-body">アプリの設定・登録停留所・発車時刻キャッシュはすべてお使いのデバイス内にのみ保存されます。クラウドへの同期や外部への送信は行いません。</p>
+      </div>
+      <div class="article-item">
+        <div class="article-title">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          お問い合わせ
+        </div>
+        <p class="article-body">プライバシーに関するご質問は <a href="https://docs.google.com/forms/d/e/1FAIpQLSfSjGva9lwlUc3Xrju45jRC9jL9JbsqLzMH4a7_GWAC5NZ_3A/viewform?usp=header" target="_blank" rel="noopener">お問い合わせフォーム</a> までお問い合わせください。</p>
+      </div>
+    </div>
   </div>
 
   <!-- English -->
   <div class="lang-section">
-    <div class="lang-label">English</div>
+    <div class="lang-badge">English</div>
     <p class="updated">Last updated: March 28, 2026</p>
 
-    <h2>Information We Collect</h2>
-
-    <h2>Location Data</h2>
-    <p>This app uses GPS location to detect when you approach registered bus stops. Location data is processed only on your device and is never transmitted to or stored on external servers.</p>
-
-    <h2>Personal Information</h2>
-    <p>This app does not collect any personal information such as your name, email address, or contacts.</p>
-
-    <h2>Third-Party Services</h2>
-    <p>This app uses the <a href="https://www.transit.land">Transitland</a> (transitland.org) API to retrieve transit departure data. Stop IDs and date/time information are sent with API requests.</p>
-
-    <h2>Data Storage</h2>
-    <p>All app settings, registered stops, and departure time cache are stored locally on your device only. No data is synced to the cloud or transmitted externally.</p>
-
-    <h2>Contact</h2>
-    <p>For privacy-related inquiries, please contact us via <a href="https://github.com/nycto-pj/peekdepart/issues">GitHub Issues</a>.</p>
+    <div class="article-block">
+      <div class="article-item">
+        <div class="article-title">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Location Data
+        </div>
+        <p class="article-body">This app uses GPS location to detect when you approach registered bus stops. Location data is processed only on your device and is never transmitted to or stored on external servers.</p>
+      </div>
+      <div class="article-item">
+        <div class="article-title">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Personal Information
+        </div>
+        <p class="article-body">This app does not collect any personal information such as your name, email address, or contacts.</p>
+      </div>
+      <div class="article-item">
+        <div class="article-title">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/></svg>
+          Third-Party Services
+        </div>
+        <p class="article-body">This app uses the <a href="https://www.transit.land" target="_blank" rel="noopener">Transitland</a> API to retrieve transit departure data. Stop IDs and date/time information are sent with API requests.</p>
+      </div>
+      <div class="article-item">
+        <div class="article-title">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+          Data Storage
+        </div>
+        <p class="article-body">All app settings, registered stops, and departure time cache are stored locally on your device only. No data is synced to the cloud or transmitted externally.</p>
+      </div>
+      <div class="article-item">
+        <div class="article-title">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Contact
+        </div>
+        <p class="article-body">For privacy-related inquiries, please contact us via <a href="https://docs.google.com/forms/d/e/1FAIpQLSfSjGva9lwlUc3Xrju45jRC9jL9JbsqLzMH4a7_GWAC5NZ_3A/viewform?usp=header" target="_blank" rel="noopener">our contact form</a>.</p>
+      </div>
+    </div>
   </div>
 
 </div>
 
 <footer>
-  <a href="index.html">← PEEK depart トップへ</a>
+  <div class="footer-logo">PEEK <span>depart</span></div>
+  <div><a href="index.html">← トップへ戻る</a></div>
+  <div>© 2026 nycto-pj</div>
 </footer>
 
 </body>

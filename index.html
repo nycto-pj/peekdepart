@@ -5,207 +5,410 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PEEK depart</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:       #0A0A0B;
+      --surface:  #141416;
+      --card:     #1C1C1E;
+      --border:   #2C2C2E;
+      --primary:  #F5F5F5;
+      --secondary:#8E8E93;
+      --accent:   #378ADD;
+      --accent2:  #5AA3E8;
+    }
+
     body {
-      background: #1C1C1E;
-      color: #F5F5F5;
+      background: var(--bg);
+      color: var(--primary);
       font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    a { color: #378ADD; text-decoration: none; }
-    a:hover { text-decoration: underline; }
 
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent2); }
+
+    /* ── Hero ── */
     header {
+      position: relative;
       text-align: center;
-      padding: 64px 24px 48px;
-      border-bottom: 1px solid #3A3A3C;
+      padding: 96px 24px 80px;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(55,138,221,0.12) 0%, transparent 70%);
+      pointer-events: none;
     }
     .app-icon {
-      width: 120px;
-      height: 120px;
-      border-radius: 27px;
-      margin-bottom: 24px;
+      width: 108px;
+      height: 108px;
+      border-radius: 24px;
+      margin-bottom: 28px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 24px 48px rgba(0,0,0,0.6);
     }
     .app-name {
-      font-size: 36px;
+      font-size: 42px;
       font-weight: 900;
-      letter-spacing: -1px;
+      letter-spacing: -1.5px;
+      line-height: 1;
     }
-    .app-name span {
+    .app-name .light {
       font-weight: 300;
-      color: #6E6E73;
+      color: var(--secondary);
     }
     .tagline {
-      margin-top: 12px;
-      font-size: 18px;
-      color: #6E6E73;
+      margin-top: 16px;
+      font-size: 17px;
+      color: var(--secondary);
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .badge {
-      display: inline-block;
-      margin-top: 32px;
+    .badge-wrap {
+      margin-top: 36px;
     }
-    .badge img { height: 48px; }
+    .badge-wrap img { height: 44px; opacity: 0.9; transition: opacity .2s; }
+    .badge-wrap a:hover img { opacity: 1; }
 
+    /* ── Sections ── */
     .section {
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 48px 24px;
-      border-bottom: 1px solid #3A3A3C;
+      padding: 64px 24px;
+      border-top: 1px solid var(--border);
     }
-    .section:last-child { border-bottom: none; }
-    h2 {
-      font-size: 22px;
+    .section-label {
+      font-size: 11px;
       font-weight: 700;
-      margin-bottom: 24px;
-      color: #F5F5F5;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
     }
+    .section-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 36px;
+    }
+
+    /* ── Features ── */
     .features {
       display: grid;
-      gap: 20px;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 540px) {
+      .features { grid-template-columns: 1fr; }
     }
     .feature {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color .2s;
     }
+    .feature:hover { border-color: rgba(55,138,221,0.4); }
     .feature-icon {
-      font-size: 28px;
-      line-height: 1;
-      flex-shrink: 0;
-      margin-top: 2px;
+      width: 40px;
+      height: 40px;
+      background: rgba(55,138,221,0.12);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .feature-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
     .feature-title {
+      font-size: 15px;
       font-weight: 600;
-      margin-bottom: 4px;
-      color: #F5F5F5;
+      margin-bottom: 6px;
     }
     .feature-desc {
-      font-size: 15px;
-      color: #6E6E73;
+      font-size: 14px;
+      color: var(--secondary);
+      line-height: 1.6;
     }
+
+    /* ── Steps ── */
     .steps {
       list-style: none;
-      counter-reset: step;
       display: grid;
-      gap: 16px;
+      gap: 0;
     }
-    .steps li {
-      counter-increment: step;
+    .step {
       display: flex;
-      gap: 16px;
+      gap: 20px;
       align-items: flex-start;
+      position: relative;
+      padding-bottom: 32px;
     }
-    .steps li::before {
-      content: counter(step);
-      background: #378ADD;
-      color: #fff;
-      font-weight: 700;
-      font-size: 14px;
-      width: 28px;
-      height: 28px;
+    .step:last-child { padding-bottom: 0; }
+    .step-line {
+      position: absolute;
+      left: 15px;
+      top: 32px;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .step:last-child .step-line { display: none; }
+    .step-num {
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
-    .steps li span { padding-top: 4px; color: #6E6E73; font-size: 15px; }
-    .steps li strong { color: #F5F5F5; }
-    .note {
-      background: #2C2C2E;
-      border-left: 3px solid #378ADD;
-      padding: 16px 20px;
-      border-radius: 0 8px 8px 0;
+    .step-body { padding-top: 4px; }
+    .step-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .step-desc {
       font-size: 14px;
-      color: #6E6E73;
+      color: var(--secondary);
     }
-    .note p { margin-bottom: 6px; }
-    .note p:last-child { margin-bottom: 0; }
+
+    /* ── Note ── */
+    .note {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 20px 24px;
+    }
+    .note-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: var(--secondary);
+      padding: 6px 0;
+    }
+    .note-item + .note-item { border-top: 1px solid var(--border); }
+    .note-item svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--secondary);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── Contact ── */
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    @media (max-width: 480px) {
+      .contact-card { flex-direction: column; align-items: flex-start; }
+    }
+    .contact-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+    .contact-desc { font-size: 14px; color: var(--secondary); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 10px;
+      white-space: nowrap;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .btn:hover { background: var(--accent2); color: #fff; }
+    .btn svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── Footer ── */
     footer {
+      border-top: 1px solid var(--border);
       text-align: center;
       padding: 32px 24px;
-      font-size: 14px;
-      color: #6E6E73;
+      font-size: 13px;
+      color: var(--secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    footer a { color: #6E6E73; }
+    footer a { color: var(--secondary); }
+    footer a:hover { color: var(--primary); }
+    .footer-logo { font-size: 15px; font-weight: 900; letter-spacing: -0.5px; color: var(--primary); }
+    .footer-logo span { font-weight: 300; color: var(--secondary); }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="app-name">PEEK <span>depart</span></div>
+  <img class="app-icon" src="icon.png" alt="PEEK depart icon">
+  <div class="app-name">PEEK <span class="light">depart</span></div>
   <p class="tagline">バス停に近づくだけで、ロック画面に次の発車時刻を表示</p>
-  <a class="badge" href="#">
-    <!-- App Store バッジ（公開後にリンクを差し替え） -->
-    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
-  </a>
+  <div class="badge-wrap">
+    <a href="#">
+      <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+    </a>
+  </div>
 </header>
 
 <div class="section">
-  <h2>主な機能</h2>
+  <div class="section-label">Features</div>
+  <div class="section-title">主な機能</div>
   <div class="features">
     <div class="feature">
-      <div class="feature-icon">📍</div>
-      <div>
-        <div class="feature-title">近づいたら自動表示</div>
-        <div class="feature-desc">iOSのジオフェンス機能を活用。設定した距離内にバス停が入ると、ロック画面ウィジェットが自動で更新されます。</div>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
       </div>
+      <div class="feature-title">近づいたら自動表示</div>
+      <div class="feature-desc">iOSのジオフェンス機能を活用。設定した距離内にバス停が入ると、ロック画面ウィジェットが自動で更新されます。</div>
     </div>
     <div class="feature">
-      <div class="feature-icon">🚌</div>
-      <div>
-        <div class="feature-title">行き先フィルター</div>
-        <div class="feature-desc">登録時に乗りたい方向だけを選択。不要な方面の便は表示しません。</div>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="10" width="18" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/><circle cx="12" cy="15" r="1.5"/></svg>
       </div>
+      <div class="feature-title">ロック画面ウィジェット</div>
+      <div class="feature-desc">画面を開かずに次の3便を確認。バスを逃さない。</div>
     </div>
     <div class="feature">
-      <div class="feature-icon">🔒</div>
-      <div>
-        <div class="feature-title">ロック画面ウィジェット</div>
-        <div class="feature-desc">画面を開かずに次の3便を確認。バスを逃さない。</div>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 12h3m15 0h-3M12 3v3m0 15v-3M5.64 5.64l2.12 2.12m8.48 8.48 2.12 2.12M5.64 18.36l2.12-2.12m8.48-8.48 2.12-2.12"/></svg>
       </div>
+      <div class="feature-title">行き先フィルター</div>
+      <div class="feature-desc">登録時に乗りたい方向だけを選択。不要な方面の便は表示しません。</div>
     </div>
     <div class="feature">
-      <div class="feature-icon">🌏</div>
-      <div>
-        <div class="feature-title">6言語対応</div>
-        <div class="feature-desc">日本語・英語・韓国語・中国語・ドイツ語・フランス語に対応。</div>
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/><path d="M12 2c-2.76 3.45-4 7-4 10s1.24 6.55 4 10"/></svg>
       </div>
+      <div class="feature-title">6言語対応</div>
+      <div class="feature-desc">日本語・英語・韓国語・中国語・ドイツ語・フランス語に対応。</div>
     </div>
   </div>
 </div>
 
 <div class="section">
-  <h2>使い方</h2>
+  <div class="section-label">How to use</div>
+  <div class="section-title">使い方</div>
   <ol class="steps">
-    <li><span><strong>＋ボタン</strong>から近くのバス停を追加</span></li>
-    <li><span>乗りたい<strong>行き先を選択</strong>して登録</span></li>
-    <li><span>ロック画面に<strong>ウィジェットを追加</strong>（設定 → ロック画面）</span></li>
-    <li><span>あとは<strong>バス停に近づくだけ</strong></span></li>
+    <li class="step">
+      <div class="step-line"></div>
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">バス停を追加</div>
+        <div class="step-desc">＋ボタンから近くのバス停を検索して登録します。</div>
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-line"></div>
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">行き先を選択</div>
+        <div class="step-desc">乗りたい方面だけを選んで登録。不要な便は表示されません。</div>
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-line"></div>
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">ウィジェットをロック画面に追加</div>
+        <div class="step-desc">ロック画面を長押し → カスタマイズ → PEEK depart を追加。</div>
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">バス停に近づくだけ</div>
+        <div class="step-desc">あとは何もしなくてOK。近づくと自動で発車時刻が表示されます。</div>
+      </div>
+    </li>
   </ol>
 </div>
 
 <div class="section">
-  <h2>注意事項</h2>
+  <div class="section-label">Notice</div>
+  <div class="section-title">注意事項</div>
   <div class="note">
-    <p>・位置情報の「常に許可」が必要です</p>
-    <p>・Transitland のオープンデータを使用しています。一部地域では時刻表データが不完全な場合があります</p>
-    <p>・電車・地下鉄には現在対応していません（今後対応予定）</p>
+    <div class="note-item">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+      <span>位置情報の「常に許可」が必要です。「使用中のみ」では自動検知が動作しません。</span>
+    </div>
+    <div class="note-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>Transitlandのオープンデータを使用しています。一部地域では時刻表データが不完全な場合があります。</span>
+    </div>
+    <div class="note-item">
+      <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+      <span>電車・地下鉄には現在対応していません（今後対応予定）。</span>
+    </div>
   </div>
 </div>
 
 <div class="section">
-  <h2>サポート・お問い合わせ</h2>
-  <p style="color:#6E6E73; font-size:15px;">
-    ご意見・不具合のご報告は
-    <a href="https://github.com/nycto-pj/peekdepart/issues">GitHub Issues</a>
-    からお寄せください。
-  </p>
+  <div class="section-label">Support</div>
+  <div class="section-title">サポート・お問い合わせ</div>
+  <div class="contact-card">
+    <div>
+      <div class="contact-title">ご意見・不具合のご報告</div>
+      <div class="contact-desc">お気づきの点があればお気軽にご連絡ください。</div>
+    </div>
+    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfSjGva9lwlUc3Xrju45jRC9jL9JbsqLzMH4a7_GWAC5NZ_3A/viewform?usp=header" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      お問い合わせ
+    </a>
+  </div>
 </div>
 
 <footer>
-  <p><a href="privacy.html">プライバシーポリシー</a></p>
-  <p style="margin-top:8px;">© 2026 nycto-pj</p>
+  <div class="footer-logo">PEEK <span>depart</span></div>
+  <div>
+    <a href="privacy.html">プライバシーポリシー</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.transit.land/operators" target="_blank" rel="noopener">Powered by Transitland</a>
+  </div>
+  <div>© 2026 nycto-pj</div>
 </footer>
 
 </body>
